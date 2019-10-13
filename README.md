@@ -1,5 +1,5 @@
 
-#### This is a codebase accompanying our paper, "A Functional Proof Pearl: Inverting the Ackermann Hierarchy", submitted to APLAS 2019. 
+#### This is a codebase accompanying our paper, "Inverting the Ackermann Hierarchy", submitted to CPP 2020. 
 
 Our paper hyperlinks to this repository extensively, allowing curious readers to jump to real compilable definitions whenever we reference them in our text. 
 
