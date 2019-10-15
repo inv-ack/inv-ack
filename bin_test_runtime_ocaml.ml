@@ -331,29 +331,33 @@ let bin_inv_ack n0 =
 
 (** Testing **)
 
-(* 65536 *)
-let bignum1 =
-  N.pow (Npos (XO XH)) (N.pow (Npos (XO XH)) (N.pow (Npos (XO XH)) (Npos (XO XH))))
+(** val n1 : n **)
+let n1 =
+  N.pow (Npos (XO XH)) (Npos (XO (XO (XI (XO (XO (XI XH)))))))
 
-(* 4.3 x 10^9 *)
-let bignum2 =
-  N.pow bignum1 (Npos (XO XH))
+(** val n2 : n **)
+let n2 =
+  N.pow (Npos (XO XH)) (Npos (XO (XO (XO (XI (XO (XI (XI (XI (XI XH))))))))))
 
-(* 2.0 x 10^19728 *)
-let bignum3 =
-  N.pow (Npos (XO XH)) bignum1
 
-(* 4.0x 10^39456 *)  
-let bignum4 =
-  N.pow bignum3 (Npos (XO XH))
+(** val n3 : n **)
+let n3 =
+  N.pow (Npos (XO XH)) (Npos (XO (XO (XO (XO (XI (XO (XO (XO (XI (XI (XI (XO (XO
+    XH))))))))))))))
+
+
+(** val n4 : n **)
+let n4 =
+  N.pow (Npos (XO XH)) (Npos (XO (XO (XO (XO (XO (XI (XO (XI (XO (XI (XI (XO (XO (XO
+    (XO (XI XH)))))))))))))))))
 
 let time n f x =
     let t = Sys.time() in
-    let ans = f x in
-    Printf.printf "Execution time for %s: \t%fs\n" n (Sys.time() -. t); ans;;
+    let _ = f x in let _ = f x in let ans = f x in
+    Printf.printf "n = %s: \t%f sec\n" n ((Sys.time() -. t) /. 3.); ans;;
 
-print_string "\nFor values encoded in binary: \n";;
-time "65536" bin_inv_ack bignum1;;
-time "4.3x10^9" bin_inv_ack bignum2;;
-time "2x10^19728" bin_inv_ack bignum3;;
-time "4x10^39456" bin_inv_ack bignum4;;
+print_string "\n3-time avg wallclock times for values encoded in binary: \n";;
+time "2^100" bin_inv_ack n1;;
+time "2^1000" bin_inv_ack n2;;
+time "2^10000" bin_inv_ack n3;;
+time "2^100000" bin_inv_ack n4;;

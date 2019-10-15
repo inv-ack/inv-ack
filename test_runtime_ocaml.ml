@@ -87,8 +87,8 @@ let inv_ack_linear n = match n with
 
 let time n f x =
     let t = Sys.time() in
-    let ans = f x in
-    Printf.printf "Execution time for %d: \t%fs\n" n (Sys.time() -. t); ans;;
+    let _ = f x in let _ = f x in let ans = f x in
+    Printf.printf "n = %d: \t%f sec\n" n ((Sys.time() -. t) /. 3.); ans;;
 
 let rec buildnat j acc = 
   if j = 0 then acc else buildnat (j-1) (S acc);;
@@ -96,7 +96,7 @@ let rec buildnat j acc =
 let time_print n = 
   time n inv_ack_linear (buildnat n O);;
 
-print_string "\nFor values encoded in unary: \n";;
+print_string "\n3-time avg wallclock times for values encoded in unary: \n";;
 time_print 100;;
 time_print 1000;;
 time_print 10000;;
